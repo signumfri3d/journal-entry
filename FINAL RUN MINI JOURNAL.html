@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Journal</title>
+    <style>
+        body {
+            background-color: #f3e5f5;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .journal-container {
+            width: 400px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .journal-header {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d81b60;
+            margin-bottom: 15px;
+        }
+
+        .journal-prompt {
+            font-size: 18px;
+            color: #6a1b9a;
+            margin-bottom: 15px;
+        }
+
+        .journal-entry {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            border: 2px solid #d1c4e9;
+            border-radius: 10px;
+            background-color: #fce4ec;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            resize: none;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .submit-button {
+            background-color: #d81b60;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+
+        .submit-button:hover {
+            background-color: #c2185b;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #7b1fa2;
+        }
+    </style>
+</head>
+<body>
+    <div class="journal-container">
+        <div class="journal-header">hello, gorgeous!</div>
+        <div class="journal-prompt">how was your day?</div>
+        <textarea class="journal-entry" id="journal-entry" placeholder="Write about your day..."></textarea>
+        <button class="submit-button" onclick="submitEntry()">Submit</button>
+        <div class="footer">share a chika for todei ✨</div>
+    </div>
+
+    <script>
+        function submitEntry() {
+            const entry = document.getElementById('journal-entry').value;
+
+            fetch('https://script.google.com/macros/s/AKfycbygnRUB-LKpAGfK-8PRX2gLXv0wUxLrcBKe1XOs-p83kQyUIhWOLfEoanRIzY2z1htJ/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'entry=' + encodeURIComponent(entry)
+            })
+            .then(response => {
+                alert('Entry submitted successfully!');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
